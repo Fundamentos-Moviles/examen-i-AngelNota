@@ -32,23 +32,25 @@ class _LoginState extends State<Login> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Color(0xff520120),
-            Color(0xff64011f),
-            Color(0xff41011a),
-            Color(0xffb20222),
+            con.fondo,
+            con.fondo2,
+            con.fondo3,
+            con.fondo4,
           ],
         ),
       ),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          childAspectRatio: 0.51,
+          childAspectRatio: 0.512,
         ),
         itemBuilder: (context, index) {
+          final colors = [con.fondo4, con.fondo2, con.fondo3];
+          final color = colors[index % 3];
           return Container(
             margin: EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: con.fondo2,
+              color: color,
               borderRadius: BorderRadius.circular(20),
             ),
           );
@@ -57,14 +59,13 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
   Widget _buildLoginForm() {
     return Center(
       child: Container(
         width: 300,
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.2),
+          color: con.fondoForm,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -130,41 +131,29 @@ class _LoginState extends State<Login> {
   void validaUser() {
     setState(() {
       if (usuario.text == 'test' && pass.text == 'FDM1') {
-        showSnackBar('Bienvenido', 10);
+        con.showSnackBar(context,'Bienvenido', 10);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }
       else if(usuario.text != 'test' && pass.text == 'FDM1') {
-        showSnackBar('Usuario incorrecto', 10);
+        con.showSnackBar(context,'Usuario incorrecto', 10);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       }
       else if(usuario.text == 'test' && pass.text != 'FDM1') {
-        showSnackBar('Contraseña incorrecta', 10);
+        con.showSnackBar(context,'Contraseña incorrecta', 10);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       }
       else if((usuario.text == '' && pass.text == '') || (usuario.text == ' ' && pass.text == ' ')){
-        showSnackBar('Datos incompletos', 10);
+        con.showSnackBar(context,'Datos incompletos', 10);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       }
       else {
-        showSnackBar('Usuario y contraseña incorrectos', 10);
+        con.showSnackBar(context,'Usuario y contraseña incorrectos', 10);
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Login()));
       }
     });
-  }
-  void showSnackBar(String texto, int duracion) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          texto,
-          textAlign: TextAlign.center,
-        ),
-        duration: Duration(seconds: duracion),
-        action: SnackBarAction(label: 'Cerrar', onPressed: () {}),
-      ),
-    );
   }
 }

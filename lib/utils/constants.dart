@@ -12,19 +12,34 @@ const titulos = Color(0xff948800);
 const botones = Color(0xffa65476);
 const efectos = Color(0xff919b02);
 const fondoForm = Color(0x80FFFFFF);
+const subtitulos = Colors.grey;
+const estrellas = Colors.amber;
 
-/*
-const List lista = [
-  //ID # 1er texto # ... # num
-  '1#Texto 1#Texto 2#Texto 3#1#1',
-  '2#Texto 21#Texto 22#Texto 23#21#2',
-  '3#Texto 31#Texto 32#Texto 33#31#1',
-  '4#Texto 41#Texto 42#Texto 43#41#2',
-  '5#Texto 51#Texto 52#Texto 53#51#1',
-  '6#Texto 61#Texto 62#Texto 63#61#2',
-  '7#Texto 71#Texto 72#Texto 73#71#2',
-  '8#Texto 81#Texto 82#Texto 83#81#1',
-  '9#Texto 91#Texto 92#Texto 93#91#1',
-  '10#Texto 101#Texto 102#Texto 103#101#2',
+const List listaExamen = [
+//'id # número # titulo # descripción # num de estrellas en amarillo'
+'3#3# Iniciar Login# Nota: Terminarlo antes del home#5',
+'4#4# Iniciar Home# Nota:Es el más complicado#4',
+'5#5# Iniciar More_info # Nota: Es el más sencillo#5',
+'6#6# Terminar examen # Nota: No esta tan fácil#3',
+'7#7# No me repruebe # Nota: No quiero reprobar#2',
+'8#8# Estudiar # Nota: tengo que estudiar para otros examenes#1',
+'9#9# Ir al cine # Nota: No se que peliculas esten en cartelera#0',
+'10#10# No se que poner # Nota: Se me acaban las ideas#5',
+'11#11# Hola # Nota: Mucha lista#4',
+'12#12# Computadora # Nota: Buenas tardes#3',
+'13#13# Futurama # Nota: Buena serie#2',
+'14#14# Llamar a mamá # Nota: necesito decirle algo importante#1',
 ];
-*/
+
+void showSnackBar(BuildContext context, String texto, int duracion) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        texto,
+        textAlign: TextAlign.center,
+      ),
+      duration: Duration(seconds: duracion),
+      action: SnackBarAction(label: 'Cerrar', onPressed: () {}),
+    ),
+  );
+}

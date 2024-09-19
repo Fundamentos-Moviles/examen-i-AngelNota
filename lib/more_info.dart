@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:examen_1_lacm/utils/constants.dart' as con;
+import 'dart:math';
 
 class MoreInfo extends StatefulWidget {
   const MoreInfo({super.key});
@@ -9,19 +10,14 @@ class MoreInfo extends StatefulWidget {
 }
 
 class _MoreInfoState extends State<MoreInfo> {
-  List<Widget> boxes = [];
+  List<Color> boxColors = [];
+  final Random _random = Random();
 
   void _addBox() {
     setState(() {
-      Color boxColor = boxes.length.isEven ? con.fondo4 : con.fondo2;
-      boxes.add(
-        Container(
-          decoration: BoxDecoration(
-            color: boxColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      );
+      List<Color> colors = [con.fondo2, con.fondo3, con.fondo4];
+      Color boxColor = colors[_random.nextInt(colors.length)];
+      boxColors.add(boxColor);
     });
   }
 
@@ -37,12 +33,22 @@ class _MoreInfoState extends State<MoreInfo> {
       body: Column(
         children: [
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 12,
-              padding: const EdgeInsets.all(10),
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              children: boxes,
+            child: GridView.builder(
+              itemCount: boxColors.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 12,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) {
+                return Container(
+                  key: UniqueKey(),
+                  decoration: BoxDecoration(
+                    color: boxColors[index],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+              },
             ),
           ),
           Padding(
