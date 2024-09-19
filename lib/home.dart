@@ -71,113 +71,6 @@ class _HomeState extends State<Home> {
       },
     );
   }
-  Widget _buildActivityCard(String id, String title, String note, int rating, bool showButtons, int index) {
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 8), // Margen entre las tarjetas
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)), // Bordes redondeados
-      elevation: 4, // Añadir sombra para dar profundidad
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Fila superior con ID y el icono
-            Row(
-              children: [
-                Text(
-                  id,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.teal[700], // Color del ID
-                  ),
-                ),
-                SizedBox(width: 8),
-                Icon(Icons.eco, color: Colors.green), // Icono de la hoja
-              ],
-            ),
-            SizedBox(height: 8),
-
-            // Título
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(height: 4),
-
-            // Nota
-            Text(
-              note,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
-            ),
-            SizedBox(height: 8),
-
-            // Fila inferior con las estrellas y botones
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Generar estrellas
-                Row(
-                  children: List.generate(5, (index) {
-                    return Icon(
-                      index < rating ? Icons.star : Icons.star_border,
-                      color: index < rating ? Colors.amber : Colors.grey,
-                      size: 20,
-                    );
-                  }),
-                ),
-
-                // Mostrar botones si showButtons es true
-                if (showButtons)
-                  Row(
-                    children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MoreInfo()),
-                          );
-                        },
-                        icon: Icon(Icons.edit, color: con.blanco),
-                        label: Text('Ver más', style: TextStyle(color: con.blanco)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: con.botones, // Color del botón
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          _eliminarElemento(id, index); // Llamar a la función de eliminar
-                        },
-                        icon: Icon(Icons.delete, color: con.blanco),
-                        label: Text('Borrar', style: TextStyle(color: con.blanco)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: con.botones,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildActivitytwoCard(String id, String title, String note, int rating, int index){
     return Column(
       children: [
@@ -243,7 +136,6 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-
         // Segundo card con botones
         if(int.parse(id) % 2 == 0)
           Card(
@@ -364,7 +256,6 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-
   void _eliminarElemento(String id, int index) {
     if (!noEliminables.contains(id)) {
       setState(() {
